@@ -8,20 +8,22 @@ public class MachineSpawnScript : MonoBehaviour
     void Start()
     {
         machineController = GetComponent<MachineController>();
-        StartCoroutine(stopt());
+        StartCoroutine(stop());
     }
 
 
     public void StopMachinePalet()
     {
-        machineController.machinePalet.StopOfsetSpeed();
+        machineController.GetMachinePaletScript().StopOfsetSpeed();
+        machineController.GetConveyorScript().StopMoveObject();
     }
     public void StartMachinePalet()
     {
-        machineController.machinePalet.StartOfsetSpeed();
+        machineController.GetMachinePaletScript().StartOfsetSpeed();
+        machineController.GetConveyorScript().StartMoveObject();
     }
 
-    IEnumerator stopt()
+    IEnumerator stop()
     {
         while (true)
         {

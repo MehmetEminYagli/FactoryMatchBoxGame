@@ -10,11 +10,15 @@ public class MachinePaletScript : MonoBehaviour
     void Start()
     {
         currentSpeed = offsetSpeed;
-        paletMaterial = paletObject.GetComponentInChildren<MeshRenderer>().material;
-
+        GetPaletMaterial();
         StartCoroutine(PaletAnimation());
     }
 
+
+    public Material GetPaletMaterial()
+    {
+        return paletMaterial = paletObject.GetComponentInChildren<MeshRenderer>().material;
+    }
 
     IEnumerator PaletAnimation()
     {
