@@ -27,9 +27,9 @@ public class MachineSpawnScript : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
-            Debug.Log("bekliyor");
-            StopMachinePalet();
+            //yield return new WaitForSeconds(1f);
+            //Debug.Log("bekliyor");
+            //StopMachinePalet();
             yield return new WaitForSeconds(1f);
             Debug.Log("calismaya basladi");
             StartMachinePalet();

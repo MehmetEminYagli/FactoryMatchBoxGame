@@ -23,15 +23,9 @@ public class ConveyorScript : MonoBehaviour
 
     private void ObjectDirection()
     {
-        // Nesnenin yönünü Quaternion üzerinden alıyoruz
         Quaternion rotation = transform.rotation;
-
-        // İstediğimiz eksenler üzerinde yön vektörünü hesaplıyoruz (örneğin çapraz yön)
         initialDirection = rotation * Vector3.forward;
-
-        Debug.Log("Initial Diagonal Direction: " + initialDirection);
     }
-
 
     public Vector3 GetInitialDirection()
     {
