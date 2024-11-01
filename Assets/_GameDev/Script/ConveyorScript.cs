@@ -39,10 +39,6 @@ public class ConveyorScript : MonoBehaviour
         rb.MovePosition(pos);
     }
 
-
-
-  
-
     public void StartMoveObject()
     {
         speed = currentSpeed;

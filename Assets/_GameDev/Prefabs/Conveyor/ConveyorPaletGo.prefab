@@ -843,6 +843,7 @@ GameObject:
   - component: {fileID: 7543009429254447841}
   - component: {fileID: 1617807684230741589}
   - component: {fileID: 8392213957465809764}
+  - component: {fileID: 3756649558112549696}
   m_Layer: 0
   m_Name: PaletArrow.010
   m_TagString: Untagged
@@ -937,8 +938,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 0.29972082, z: 8.048582}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9600544, y: 0.29972082, z: 8.048582}
+  m_Center: {x: 0.010251939, y: -2.7881627e-12, z: 3.6480225e-14}
 --- !u!114 &1617807684230741589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,7 +947,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9100164535863829599}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f71614fb3d89a3242a5e9a51b0b43580, type: 3}
   m_Name: 
@@ -982,3 +983,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3756649558112549696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9100164535863829599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d22e43bce0994140a07b34178c7277d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  conveyorSpeed: 0
+  onBelt: []
+  initialDirection: {x: 0, y: 0, z: 0}

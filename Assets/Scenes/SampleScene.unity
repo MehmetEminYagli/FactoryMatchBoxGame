@@ -1462,6 +1462,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4382346161984881694, guid: bee35749561a7a84da6b8add69265d56, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6974036916967438864, guid: bee35749561a7a84da6b8add69265d56, type: 3}
       propertyPath: m_Name
       value: FactorMachine (14)
@@ -2207,6 +2211,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 934847314446382165, guid: ddfd50026ac63d343b32e2d3e838278b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.81
+      objectReference: {fileID: 0}
     - target: {fileID: 1499051665412204421, guid: ddfd50026ac63d343b32e2d3e838278b, type: 3}
       propertyPath: m_Name
       value: ConveyorPaletGo (1)
@@ -2221,7 +2229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9057582011953946762, guid: ddfd50026ac63d343b32e2d3e838278b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.67
+      value: 28.39
       objectReference: {fileID: 0}
     - target: {fileID: 9057582011953946762, guid: ddfd50026ac63d343b32e2d3e838278b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2601,7 +2609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9057582011953946762, guid: ddfd50026ac63d343b32e2d3e838278b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.78
+      value: 15.89
       objectReference: {fileID: 0}
     - target: {fileID: 9057582011953946762, guid: ddfd50026ac63d343b32e2d3e838278b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2609,7 +2617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9057582011953946762, guid: ddfd50026ac63d343b32e2d3e838278b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.46
+      value: -9.26
       objectReference: {fileID: 0}
     - target: {fileID: 9057582011953946762, guid: ddfd50026ac63d343b32e2d3e838278b, type: 3}
       propertyPath: m_LocalRotation.w
