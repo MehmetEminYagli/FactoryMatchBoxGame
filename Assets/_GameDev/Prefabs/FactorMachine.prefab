@@ -683,8 +683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d22e43bce0994140a07b34178c7277d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2.5
   conveyorSpeed: 0
+  currentSpeed: 0
   onBelt: []
   initialDirection: {x: 0, y: 0, z: 0}
-  conveyorCollider: {fileID: 0}
