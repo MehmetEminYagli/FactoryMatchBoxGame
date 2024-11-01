@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class ConveyorScriptV2 : MonoBehaviour
 {
-    [SerializeField]
-    private float speed, conveyorSpeed;
+    [SerializeField] private float speed, conveyorSpeed, currentSpeed;
     [SerializeField] private List<GameObject> onBelt;
     [SerializeField] private Vector3 initialDirection;
 
     void Start()
     {
+        currentSpeed = speed;
         ObjectDirection();
     }
 
     private void ObjectDirection()
     {
         Quaternion rotation = transform.rotation;
-        initialDirection = rotation * Vector3.forward;
+        initialDirection = rotation * Vector3.back;
     }
 
     public Vector3 GetInitialDirection()
@@ -27,14 +27,13 @@ public class ConveyorScriptV2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        // OnBelt listesinde bulunan her nesne için konumunu kaydırarak hareket ettir
         foreach (GameObject obj in onBelt)
         {
             Rigidbody rb = obj.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Vector3 newPosition = rb.position + GetInitialDirection() * -speed * Time.fixedDeltaTime;
-                rb.MovePosition(newPosition);
+                Vector3 targetPosition = rb.position + GetInitialDirection() * speed * Time.fixedDeltaTime;
+                rb.MovePosition(targetPosition);
             }
         }
     }
@@ -48,4 +47,16 @@ public class ConveyorScriptV2 : MonoBehaviour
     {
         onBelt.Remove(collision.gameObject);
     }
+
+
+    public void StartMoveObject()
+    {
+        speed = currentSpeed;
+    }
+
+    public void StopMoveObject()
+    {
+        speed = 0f;
+    }
+
 }

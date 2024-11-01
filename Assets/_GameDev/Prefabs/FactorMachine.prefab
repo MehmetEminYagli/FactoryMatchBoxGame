@@ -355,8 +355,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.21311092, y: 0.8503171, z: 22.193079}
-  m_Center: {x: 0.39344433, y: -0.07484144, z: 0.63375574}
+  m_Size: {x: 0.21311092, y: 0.8503171, z: 23.77715}
+  m_Center: {x: 0.39344445, y: -0.07484144, z: -0.15827937}
 --- !u!1 &7108078388873647368
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,8 +463,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.21311092, y: 0.8503171, z: 20.287117}
-  m_Center: {x: 0.39344448, y: -0.07484144, z: -1.466536}
+  m_Size: {x: 0.21311092, y: 0.8503171, z: 21.32508}
+  m_Center: {x: 0.3934444, y: -0.07484144, z: -0.9475541}
 --- !u!1001 &2094402973050741965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -608,9 +608,6 @@ PrefabInstance:
       addedObject: {fileID: 8794878485371418455}
     - targetCorrespondingSourceObject: {fileID: 4189926990760352472, guid: 0cbf8189007ea2042bac268ea5abc22c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4382346161984881694}
-    - targetCorrespondingSourceObject: {fileID: 4189926990760352472, guid: 0cbf8189007ea2042bac268ea5abc22c, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6773706912507097963}
     - targetCorrespondingSourceObject: {fileID: 4189926990760352472, guid: 0cbf8189007ea2042bac268ea5abc22c, type: 3}
       insertIndex: -1
@@ -647,22 +644,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0925407, y: 0.29972082, z: 8.048582}
   m_Center: {x: 0.013954282, y: 0, z: 5.6027705e-10}
---- !u!114 &4382346161984881694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4935217330509113423}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f71614fb3d89a3242a5e9a51b0b43580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  currentSpeed: 0
-  machineController: {fileID: 0}
-  initialDirection: {x: 0, y: 0, z: 0}
 --- !u!54 &6773706912507097963
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -706,3 +687,4 @@ MonoBehaviour:
   conveyorSpeed: 0
   onBelt: []
   initialDirection: {x: 0, y: 0, z: 0}
+  conveyorCollider: {fileID: 0}
