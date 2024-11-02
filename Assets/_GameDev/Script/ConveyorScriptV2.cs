@@ -7,9 +7,11 @@ public class ConveyorScriptV2 : MonoBehaviour
     [SerializeField] private float speed, conveyorSpeed, currentSpeed;
     [SerializeField] private List<GameObject> onBelt;
     [SerializeField] private Vector3 initialDirection;
+    [SerializeField] private MachineController machine;
 
     void Start()
     {
+        machine = GetComponentInParent<MachineController>();
         currentSpeed = speed;
         ObjectDirection();
     }

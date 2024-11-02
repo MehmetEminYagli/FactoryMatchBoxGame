@@ -392,7 +392,6 @@ GameObject:
   - component: {fileID: 1647772654065133483}
   - component: {fileID: 7459357202587031714}
   - component: {fileID: 6793743997598422198}
-  - component: {fileID: 513906993769184638}
   m_Layer: 0
   m_Name: two sided pallet
   m_TagString: Untagged
@@ -435,6 +434,7 @@ MonoBehaviour:
   machinePalet: {fileID: 0}
   machinespawn: {fileID: 0}
   conveyor: {fileID: 0}
+  spawnListGameobject: {fileID: 0}
 --- !u!114 &6793743997598422198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,18 +449,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paletObject: {fileID: 297250675957106268}
   offsetSpeed: 0.0045
---- !u!114 &513906993769184638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5913857788666630609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cb01f41ab227f448ad5b386312302d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6202123236657041394
 GameObject:
   m_ObjectHideFlags: 0
