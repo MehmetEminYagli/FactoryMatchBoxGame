@@ -2,24 +2,22 @@ using UnityEngine;
 
 public class MachineController : MonoBehaviour
 {
-    [SerializeField] private MachinePaletScript machinePalet;
     [SerializeField] private MachineSpawnScript machinespawn;
     [SerializeField] private ConveyorScriptV2 conveyor;
     [SerializeField] private SpawnListGameobject spawnListGameobject;
 
-
+    [SerializeField] private int machineID;
     void Start()
     {
-        machinePalet = GetComponent<MachinePaletScript>();
         machinespawn = GetComponent<MachineSpawnScript>();
         conveyor = GetComponentInChildren<ConveyorScriptV2>();
         spawnListGameobject = GetComponent<SpawnListGameobject>();
+        GetMachineID();
     }
 
-
-    public MachinePaletScript GetMachinePaletScript()
+    public int GetMachineID()
     {
-        return machinePalet;
+        return machineID;
     }
 
     public MachineSpawnScript GetMachineSpawnScript()
@@ -38,11 +36,4 @@ public class MachineController : MonoBehaviour
     }
 
 
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

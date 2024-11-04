@@ -11,7 +11,23 @@ public class GameTouchController : MonoBehaviour
 
     private void TouchControl()
     {
+        bool isTouched = false;
+        Vector3 touchPosition = Vector3.zero;
+
+
         if (Input.GetMouseButtonDown(0))
+        {
+            isTouched = true;
+            touchPosition = Input.mousePosition;
+        }
+
+        else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            isTouched = true;
+            touchPosition = Input.GetTouch(0).position;
+        }
+
+        if (isTouched)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

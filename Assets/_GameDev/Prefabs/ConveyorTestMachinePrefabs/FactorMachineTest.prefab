@@ -787,7 +787,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1081280774596769377}
   - component: {fileID: 7787239556563635736}
-  - component: {fileID: 4108473540593220629}
   - component: {fileID: 467807747672119859}
   - component: {fileID: 7487159983901422187}
   m_Layer: 0
@@ -829,24 +828,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4ad9a89b5de7744a8d392f3f4baa69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  machinePalet: {fileID: 0}
   machinespawn: {fileID: 0}
   conveyor: {fileID: 0}
   spawnListGameobject: {fileID: 0}
---- !u!114 &4108473540593220629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765594266256449098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9462b6f8f895d9f4b9674d1209fc3cb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  paletObject: {fileID: 6981511934103840932}
-  offsetSpeed: 0.0045
+  machineID: 0
 --- !u!114 &467807747672119859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1101,12 +1086,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d22e43bce0994140a07b34178c7277d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
-  conveyorSpeed: 0
-  currentSpeed: 0
+  speed: 3.75
+  conveyorSpeed: 1.275
   onBelt: []
   initialDirection: {x: 0, y: 0, z: 0}
-  machine: {fileID: 0}
 --- !u!1001 &8639171937507471624
 PrefabInstance:
   m_ObjectHideFlags: 0

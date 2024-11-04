@@ -4,27 +4,41 @@ using UnityEngine;
 
 public class ConveyorScriptV2 : MonoBehaviour
 {
-    [SerializeField] private float speed, conveyorSpeed, currentSpeed;
+    [SerializeField] private float speed =2.5f;
+    [SerializeField] private float conveyorSpeed = 0.85f;
+    private float currentSpeed, currentConveyorSpeed;
     [SerializeField] private List<GameObject> onBelt;
     [SerializeField] private Vector3 initialDirection;
-    [SerializeField] private MachineController machine;
-
+    private Material paletMaterial;
     void Start()
     {
-        machine = GetComponentInParent<MachineController>();
+        GetPaletMaterial();
         currentSpeed = speed;
+        currentConveyorSpeed = conveyorSpeed;
         ObjectDirection();
+    }
+
+    public Material GetPaletMaterial()
+    {
+        return paletMaterial = GetComponent<MeshRenderer>().material;
+    }
+
+    public Vector3 GetInitialDirection()
+    {
+        return initialDirection;
+    }
+
+    private void Update()
+    {
+        Vector2 currentOffset = paletMaterial.mainTextureOffset;
+        currentOffset.y += conveyorSpeed * Time.deltaTime;
+        paletMaterial.mainTextureOffset = currentOffset;
     }
 
     private void ObjectDirection()
     {
         Quaternion rotation = transform.rotation;
         initialDirection = rotation * Vector3.back;
-    }
-
-    public Vector3 GetInitialDirection()
-    {
-        return initialDirection;
     }
 
     void FixedUpdate()
@@ -54,11 +68,13 @@ public class ConveyorScriptV2 : MonoBehaviour
     public void StartMoveObject()
     {
         speed = currentSpeed;
+        conveyorSpeed = currentConveyorSpeed;
     }
 
     public void StopMoveObject()
     {
         speed = 0f;
+        conveyorSpeed = 0f;
     }
 
 }
