@@ -49,7 +49,7 @@ public class GameTouchController : MonoBehaviour
                 }
                 else if (clickedObject.GetComponent<ConveyorScriptV2>() != null && selectedObject != null)
                 {
-                    Vector3 targetPosition = new Vector3(hit.point.x, hit.point.y, selectedObject.transform.position.z);
+                    Vector3 targetPosition = new Vector3(hit.point.x, selectedObject.transform.position.y, selectedObject.transform.position.z);
 
                     selectedObject.transform.DOMove(targetPosition, .6f).SetEase(Ease.InOutQuad);
                     

@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+
 public class ItemController : MonoBehaviour
 {
 
@@ -27,16 +28,12 @@ public class ItemController : MonoBehaviour
             if (factoryItem.GetItemID() == machine.GetMachineID())
             {
                 SetTrueMachineEffect(true);
+                DestroyFactoryItem(factoryItem,(2.7f));
             }
             else
             {
                 SetFalseMachineEffect(true);
-                factoryItem.transform.DOScale(Vector3.zero, .5f).SetEase(Ease.InOutQuad).SetDelay(.5f).OnComplete(() =>
-                {
-                    Destroy(factoryItem);
-                    SetTrueMachineEffect(false);
-                    SetFalseMachineEffect(false);
-                });
+                 DestroyFactoryItem(factoryItem,(.5f));
             }
         }
     }
@@ -47,6 +44,16 @@ public class ItemController : MonoBehaviour
             SetTrueMachineEffect(false);
             SetFalseMachineEffect(false);
         }
+    }
+
+    private void DestroyFactoryItem(FactoryItem itemscript,float delayTime)
+    {
+        itemscript.transform.DOScale(Vector3.zero, .5f).SetEase(Ease.InOutQuad).SetDelay(delayTime).OnComplete(() =>
+        {
+            Destroy(itemscript);
+            SetTrueMachineEffect(false);
+            SetFalseMachineEffect(false);
+        });
     }
     private void SetTrueMachineEffect(bool isActive)
     {
