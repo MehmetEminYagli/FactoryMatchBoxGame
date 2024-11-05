@@ -3,10 +3,10 @@ using System;
 public class GameManager : MonoSingleton<GameManager>
 {
 
-    [SerializeField] private AudioManager audioManager;
-    [SerializeField] private LevelManager levelManager;
-    [SerializeField] private UIManager uiManager;
-    [SerializeField] private NotificationManager notificationManager;
+    public AudioManager audioManager;
+    public LevelManager levelManager;
+    public UIManager uiManager;
+    public NotificationManager notificationManager;
 
 
 
@@ -14,7 +14,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         base.Init();
 
-  
+
         Application.targetFrameRate = 60;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
@@ -28,21 +28,16 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
-       
-       
-    }
 
 
-    public void LevelStart()
-    {
-      
     }
+
 
 
 
     public void LevelFinish(bool isSuccess)
     {
-      
+
         if (isSuccess)
         {
             DataManager.CurrentLevelIndex++;
@@ -50,6 +45,6 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
 
-   
+
 
 }

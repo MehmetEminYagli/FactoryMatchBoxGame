@@ -2534,6 +2534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6941fad418362a64897140bd53005d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currencyText: {fileID: 2841390322620054331}
+  noInternetPopUp: {fileID: 0}
 --- !u!1 &9097675603200222474
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,8 +35,6 @@ public class GameTouchController : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 GameObject clickedObject = hit.collider.gameObject;
-                Debug.Log(clickedObject.name);
-
                 if (clickedObject.GetComponent<FactoryItem>() != null && selectedObject == null)
                 {
                     selectedObject = clickedObject;

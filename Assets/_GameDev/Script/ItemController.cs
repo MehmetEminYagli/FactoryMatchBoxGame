@@ -17,6 +17,8 @@ public class ItemController : MonoBehaviour
         SetTrueMachineEffect(false);
         SetFalseMachineEffect(false);
     }
+
+    [System.Obsolete]
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<FactoryItem>(out FactoryItem factoryItem))
@@ -27,11 +29,13 @@ public class ItemController : MonoBehaviour
 
             if (factoryItem.GetItemID() == machine.GetMachineID())
             {
+                GameManager.Instance.uiManager.AddCurrency();
                 SetTrueMachineEffect(true);
                 DestroyFactoryItem(factoryItem,(trueDestoryDelayTime));
             }
             else
             {
+                GameManager.Instance.uiManager.IncreaseCurrency();
                 SetFalseMachineEffect(true);
                  DestroyFactoryItem(factoryItem,(.5f));
             }
@@ -63,6 +67,8 @@ public class ItemController : MonoBehaviour
     {
         falseMachineEffect.SetActive(isActive);
     }
+
+
 
 }
 
