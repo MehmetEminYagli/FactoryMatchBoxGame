@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "468817525417",
+    "firebase_url": "https://factorygame-771e3-default-rtdb.firebaseio.com",
+    "project_id": "factorygame-771e3",
+    "storage_bucket": "factorygame-771e3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468817525417:android:1f6724932fe0d38d9847b8",
+        "android_client_info": {
+          "package_name": "com.mehmeteminyagli.factorygame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEHig0ppFaoUL5Af49gGIpCL_nLvfu7nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

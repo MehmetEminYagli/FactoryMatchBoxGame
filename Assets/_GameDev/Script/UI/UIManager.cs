@@ -24,6 +24,10 @@ public class UIManager : MonoBehaviour
     {
         DataManager.Currency += 10;
     }
+    public int GetMoney()
+    {
+        return DataManager.Currency;
+    }
 
     public void IncreaseCurrency()
     {
