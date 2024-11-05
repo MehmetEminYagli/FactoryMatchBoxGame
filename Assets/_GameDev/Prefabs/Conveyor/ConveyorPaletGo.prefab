@@ -233,6 +233,7 @@ MonoBehaviour:
   controlMachineObject: {fileID: 5925781300055858163}
   trueMachineEffect: {fileID: 8309095441286414389}
   falseMachineEffect: {fileID: 3636540557020920473}
+  trueDestoryDelayTime: 2.7
 --- !u!1 &884361795786776600
 GameObject:
   m_ObjectHideFlags: 0

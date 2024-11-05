@@ -62,7 +62,6 @@ public class MachineSpawnScript : MonoBehaviour
             //Debug.Log("bekliyor");
             //StopMachinePalet();
             yield return new WaitForSeconds(1f);
-            Debug.Log("calismaya basladi");
             StartMachinePalet();
 
         }

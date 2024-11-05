@@ -9,7 +9,7 @@ public class ItemController : MonoBehaviour
     [SerializeField] private GameObject controlMachineObject;
     [SerializeField] private GameObject trueMachineEffect;
     [SerializeField] private GameObject falseMachineEffect;
-
+    [SerializeField] private float trueDestoryDelayTime;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class ItemController : MonoBehaviour
             if (factoryItem.GetItemID() == machine.GetMachineID())
             {
                 SetTrueMachineEffect(true);
-                DestroyFactoryItem(factoryItem,(2.7f));
+                DestroyFactoryItem(factoryItem,(trueDestoryDelayTime));
             }
             else
             {
