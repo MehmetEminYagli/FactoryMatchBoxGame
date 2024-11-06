@@ -31,13 +31,13 @@ public class ItemController : MonoBehaviour
             {
                 GameManager.Instance.uiManager.AddCurrency();
                 SetTrueMachineEffect(true);
-                DestroyFactoryItem(factoryItem,(trueDestoryDelayTime));
+                DestroyFactoryItem(factoryItem, (trueDestoryDelayTime));
             }
             else
             {
                 GameManager.Instance.uiManager.IncreaseCurrency();
                 SetFalseMachineEffect(true);
-                 DestroyFactoryItem(factoryItem,(.5f));
+                DestroyFactoryItem(factoryItem, (.5f));
             }
         }
     }
@@ -50,11 +50,11 @@ public class ItemController : MonoBehaviour
         }
     }
 
-    private void DestroyFactoryItem(FactoryItem itemscript,float delayTime)
+    private void DestroyFactoryItem(FactoryItem itemscript, float delayTime)
     {
         itemscript.transform.DOScale(Vector3.zero, .5f).SetEase(Ease.InOutQuad).SetDelay(delayTime).OnComplete(() =>
         {
-            Destroy(itemscript);
+            Destroy(itemscript.gameObject);
             SetTrueMachineEffect(false);
             SetFalseMachineEffect(false);
         });

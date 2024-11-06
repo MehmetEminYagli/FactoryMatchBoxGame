@@ -43,6 +43,7 @@ public class ConveyorScriptV2 : MonoBehaviour
 
     void FixedUpdate()
     {
+        onBelt.RemoveAll(item => item == null);
         foreach (GameObject obj in onBelt)
         {
             Rigidbody rb = obj.GetComponent<Rigidbody>();
