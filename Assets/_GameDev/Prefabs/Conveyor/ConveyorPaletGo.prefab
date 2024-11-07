@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 1082933779495436692}
   - component: {fileID: 6300050072605937484}
   - component: {fileID: 737458200899599215}
+  - component: {fileID: 341797235208177372}
   m_Layer: 0
   m_Name: itemController
   m_TagString: Untagged
@@ -230,10 +231,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machine: {fileID: 0}
+  itemScore: {fileID: 0}
   controlMachineObject: {fileID: 5925781300055858163}
   trueMachineEffect: {fileID: 8309095441286414389}
   falseMachineEffect: {fileID: 3636540557020920473}
   trueDestoryDelayTime: 2.7
+--- !u!114 &341797235208177372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546024426341783921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efb799aa5ece464a811a7978d4f13f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemController: {fileID: 0}
+  trueItemCount: 0
 --- !u!1 &884361795786776600
 GameObject:
   m_ObjectHideFlags: 0

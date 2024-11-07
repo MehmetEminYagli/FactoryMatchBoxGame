@@ -17,6 +17,10 @@ public class ConveyorScriptV2 : MonoBehaviour
         currentConveyorSpeed = conveyorSpeed;
         ObjectDirection();
     }
+    public List<GameObject> GetOnBelt()
+    {
+        return onBelt;
+    }
 
     public Material GetPaletMaterial()
     {

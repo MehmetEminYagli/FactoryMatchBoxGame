@@ -7,14 +7,23 @@ public class MachineSpawnScript : MonoBehaviour
     [SerializeField] private List<GameObject> spawnableObjects;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private bool isSpawn = true;
- 
+    [SerializeField] private int spawnedCount;
 
+    //public delegate void ObjectSpawned(GameObject spawnedObject);
+    //public event ObjectSpawned OnObjectSpawned;
+    public bool GetisSpawn()
+    {
+        return isSpawn;
+    }
     void Start()
     {
+        GameManager.Instance.RegisterMachine(this);
         ComponentStart();
         StartCoroutine(SpawnItemCoroutine());
         StartCoroutine(stop());
     }
+   
+
     private void ComponentStart()
     {
         machineController = GetComponent<MachineController>();
@@ -29,6 +38,13 @@ public class MachineSpawnScript : MonoBehaviour
 
             yield return new WaitForSeconds(randomTime);
             SpawnFactoryItem();
+            spawnedCount++;
+            
+            if (spawnedCount == GameManager.Instance.levelManager.controlFinishCount)
+            {
+                Debug.Log("nesne spawn olmayı bırakıyor");
+                isSpawn = false;
+            }
         }
     }
 
@@ -41,7 +57,9 @@ public class MachineSpawnScript : MonoBehaviour
         int randomIndex = Random.Range(0, spawnableObjects.Count);
         GameObject selectedItem = spawnableObjects[randomIndex];
 
-        Instantiate(selectedItem, spawnPoint.position, Quaternion.identity,transform.parent);
+        GameObject spawnedObject =Instantiate(selectedItem, spawnPoint.position, Quaternion.identity, spawnPoint);
+        GameManager.Instance.levelManager.AddSpawnedObject(spawnedObject.gameObject);
+        //OnObjectSpawned?.Invoke(spawnedObject);
     }
 
 
@@ -65,16 +83,6 @@ public class MachineSpawnScript : MonoBehaviour
             StartMachinePalet();
 
         }
-
-    }
-
-
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 }

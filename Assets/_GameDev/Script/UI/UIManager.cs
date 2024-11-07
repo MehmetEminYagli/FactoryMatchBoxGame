@@ -8,31 +8,40 @@ public class UIManager : MonoBehaviour
     public UILevelEnd levelEnd;
     public UIOverlay overlay;
 
-
-
-    [Category("Save")]
-    public void ClearPlayerPrefs()
+    private void Start()
     {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
-        Debug.Log("PlayerPrefs cleared successfully!");
+        GameManager.Instance.OnGameStateChanged += OnGameStateChanged;
+
     }
 
-
-    [Category("Economy")]
-    public void AddCurrency()
+   
+    private void OnGameStateChanged()
     {
-        DataManager.Currency += 10;
-    }
-
-    public void IncreaseCurrency()
-    {
-        DataManager.Currency -= 10;
-    }
-    public int Currency
-    {
-        get => DataManager.Currency;
-        set => DataManager.Currency = value;
+        switch (GameManager.Instance.GameState)
+        {
+            case GameState.Loading:
+                break;
+            case GameState.Ready:
+                mainMenu.gameObject.SetActive(true);
+                levelEnd.gameObject.SetActive(false);
+                break;
+            case GameState.Gameplay:
+                mainMenu.gameObject.SetActive(false);
+                levelEnd.gameObject.SetActive(false);
+                break;
+            case GameState.Complete:
+                mainMenu.gameObject.SetActive(false);
+                levelEnd.gameObject.SetActive(true);
+                levelEnd.Show(true);
+                break;
+            case GameState.Fail:
+                mainMenu.gameObject.SetActive(false);
+                levelEnd.gameObject.SetActive(true);
+                levelEnd.Show(false);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
 

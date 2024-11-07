@@ -4,16 +4,19 @@ using DG.Tweening;
 public class ItemController : MonoBehaviour
 {
 
-
+    
     [SerializeField] private MachineController machine;
+    [SerializeField] private ItemScoreController itemScore;
     [SerializeField] private GameObject controlMachineObject;
     [SerializeField] private GameObject trueMachineEffect;
     [SerializeField] private GameObject falseMachineEffect;
     [SerializeField] private float trueDestoryDelayTime;
 
+
     private void Start()
     {
         machine = GetComponentInParent<MachineController>();
+        itemScore = GetComponent<ItemScoreController>();
         SetTrueMachineEffect(false);
         SetFalseMachineEffect(false);
     }
@@ -29,14 +32,16 @@ public class ItemController : MonoBehaviour
 
             if (factoryItem.GetItemID() == machine.GetMachineID())
             {
-                GameManager.Instance.uiManager.AddCurrency();
+                GameManager.Instance.AddCurrency();
                 SetTrueMachineEffect(true);
+                itemScore.trueItemCount++;
                 DestroyFactoryItem(factoryItem, (trueDestoryDelayTime));
             }
             else
             {
-                GameManager.Instance.uiManager.IncreaseCurrency();
+                GameManager.Instance.IncreaseCurrency();
                 SetFalseMachineEffect(true);
+                itemScore.trueItemCount--;
                 DestroyFactoryItem(factoryItem, (.5f));
             }
         }
@@ -54,6 +59,7 @@ public class ItemController : MonoBehaviour
     {
         itemscript.transform.DOScale(Vector3.zero, .5f).SetEase(Ease.InOutQuad).SetDelay(delayTime).OnComplete(() =>
         {
+            GameManager.Instance.levelManager.RemoveSpawnedObject(itemscript.gameObject);
             Destroy(itemscript.gameObject);
             SetTrueMachineEffect(false);
             SetFalseMachineEffect(false);
