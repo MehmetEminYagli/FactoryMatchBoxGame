@@ -34,14 +34,14 @@ public class ItemController : MonoBehaviour
             {
                 GameManager.Instance.AddCurrency();
                 SetTrueMachineEffect(true);
-                itemScore.trueItemCount++;
+                itemScore.TrueText();
                 DestroyFactoryItem(factoryItem, (trueDestoryDelayTime));
             }
             else
             {
                 GameManager.Instance.IncreaseCurrency();
                 SetFalseMachineEffect(true);
-                itemScore.trueItemCount--;
+                itemScore.FalseText();
                 DestroyFactoryItem(factoryItem, (.5f));
             }
         }

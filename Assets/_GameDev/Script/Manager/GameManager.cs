@@ -45,9 +45,7 @@ public class GameManager : MonoSingleton<GameManager>
     private void Start()
     {
         GameState = GameState.Ready;
-        Debug.LogError(GameState);
         LevelStart();
-        Debug.Log(GameState);
     }
 
     public void LevelStart()
@@ -72,7 +70,6 @@ public class GameManager : MonoSingleton<GameManager>
         {
             DataManager.CurrentLevelIndex++;
         }
-        Debug.Log(GameState);
     }
 
     public void RegisterMachine(MachineSpawnScript machine)

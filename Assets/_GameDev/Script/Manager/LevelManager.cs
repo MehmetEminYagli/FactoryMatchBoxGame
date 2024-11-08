@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     [Header("kontrol")]
     public int controlFinishCount; //burası şu kadar nesne spawn olduktan sonra spawn olmayı durdur yapıcaz ve kontrol kısmına geçicek
-    [SerializeField] private int RequiredTrueItemCount; // leveli geçmek için gerekli olan doğru item sayısına bakıcağız
+    /*[SerializeField] private int RequiredTrueItemCount;*/ // leveli geçmek için gerekli olan doğru item sayısına bakıcağız
 
     public bool iscontrol = false;
 
@@ -15,13 +15,12 @@ public class LevelManager : MonoBehaviour
     private List<ItemScoreController> itemScoreControllers;
     [SerializeField] private List<GameObject> spawnedObjects;
 
+
     void Start()
     {
         spawnMachineList = GameManager.Instance.spawnMachineList;
         itemScoreControllers = GameManager.Instance.itemScoreControllerList;
         spawnedObjects = new List<GameObject>();
-
-      
     }
 
     public void RemoveSpawnedObject(GameObject destroyedObject)
@@ -38,7 +37,6 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("leveli geçmek için gerekli doğru sayisi" + RequiredTrueItemCount);
         ControlWinOrFail();
     }
     public void ControlWinOrFail()
@@ -50,7 +48,7 @@ public class LevelManager : MonoBehaviour
                 iscontrol = true;
                 if (iscontrol)
                 {
-                    bool allCorrect = itemScoreControllers.All(controller => controller.getTrueItemCount() >= RequiredTrueItemCount);
+                    bool allCorrect = itemScoreControllers.All(controller => controller.ControlWinOrFail());
                     //listdeki tüm sayıları leveli geçmek için gerekli olan sayı ile karşılaştırıyor biri eşit değilse false değer döndürüyor hepsi eşit ise true değer döndüyor
                     //oyuncu win mi fail mi kontrol et
                     if (allCorrect)
