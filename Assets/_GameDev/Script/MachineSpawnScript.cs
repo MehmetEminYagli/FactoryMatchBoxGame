@@ -7,13 +7,19 @@ public class MachineSpawnScript : MonoBehaviour
     [SerializeField] private List<GameObject> spawnableObjects;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private bool isSpawn = true;
+    [SerializeField] private bool isBroken = false;
     [SerializeField] private int spawnedCount;
-
-    //public delegate void ObjectSpawned(GameObject spawnedObject);
-    //public event ObjectSpawned OnObjectSpawned;
     public bool GetisSpawn()
     {
         return isSpawn;
+    }
+    public bool GetisBroken()
+    {
+        return isBroken;
+    }
+    public void SetIsBroken(bool broke)
+    {
+        isBroken = broke;
     }
     void Start()
     {
@@ -21,47 +27,50 @@ public class MachineSpawnScript : MonoBehaviour
         ComponentStart();
         StartCoroutine(SpawnItemCoroutine());
         StartCoroutine(stop());
+        isBroken = false;
     }
-   
+
 
     private void ComponentStart()
     {
         machineController = GetComponent<MachineController>();
     }
 
-    [SerializeField] private int SpawnRate;
+    [SerializeField] private int spawnRate;
     IEnumerator SpawnItemCoroutine()
     {
         while (isSpawn)
         {
-            float randomTime = Random.Range(SpawnRate-2, SpawnRate+5);
+            float randomTime = Random.Range(spawnRate - 2, spawnRate + 5);
 
             yield return new WaitForSeconds(randomTime);
-            SpawnFactoryItem();
-            spawnedCount++;
-            
-            if (spawnedCount == GameManager.Instance.levelManager.controlFinishCount)
+
+            if (isBroken == false)
             {
-                Debug.Log("nesne spawn olmayı bırakıyor");
-                isSpawn = false;
+                SpawnFactoryItem();
+                spawnedCount++;
+                if (spawnedCount == GameManager.Instance.levelManager.controlFinishCount)
+                {
+                    Debug.Log("nesne spawn olmayı bırakıyor");
+                    isSpawn = false;
+                }
+            }
+            else
+            {
+                Debug.Log("makine bozuldu");
             }
         }
     }
-
 
     private void SpawnFactoryItem()
     {
         spawnableObjects = machineController.GetSpawnListScript().GetSpawnList();
         if (spawnableObjects.Count == 0) return;
-
         int randomIndex = Random.Range(0, spawnableObjects.Count);
         GameObject selectedItem = spawnableObjects[randomIndex];
-
-        GameObject spawnedObject =Instantiate(selectedItem, spawnPoint.position, Quaternion.identity, spawnPoint);
+        GameObject spawnedObject = Instantiate(selectedItem, spawnPoint.position, Quaternion.identity, spawnPoint);
         GameManager.Instance.levelManager.AddSpawnedObject(spawnedObject.gameObject);
-        //OnObjectSpawned?.Invoke(spawnedObject);
     }
-
 
     public void StopMachinePalet()
     {
@@ -81,8 +90,6 @@ public class MachineSpawnScript : MonoBehaviour
             //StopMachinePalet();
             yield return new WaitForSeconds(1f);
             StartMachinePalet();
-
         }
-
     }
 }

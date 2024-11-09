@@ -75,6 +75,20 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void OnExtinguishFireButtonPressed()
+    {
+        foreach (var machine in GameManager.Instance.spawnMachineList)
+        {
+            MachineStatus machineStatus = machine.GetComponent<MachineStatus>();
+            if (machineStatus != null && machine.GetisBroken() == true)
+            {
+                Debug.Log($"{gameObject.name} fire extinguished.");
+                machineStatus.MachineGoodBtn(); // Extinguish fire if machine is in Fire state
+            }
+        }
+    }
+
+
     public static void ReloadScene()
     {
         DOTween.Clear();

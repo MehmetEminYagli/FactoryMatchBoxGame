@@ -5,6 +5,7 @@ public class UIOverlay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currencyText;
     //[SerializeField] private GameObject noInternetPopUp;
 
+
     private void OnEnable()
     {
         DataManager.OnCurrencyUpdated += UpdateCurrencyText;
@@ -31,4 +32,6 @@ public class UIOverlay : MonoBehaviour
     {
         DataManager.OnCurrencyUpdated -= UpdateCurrencyText;
     }
+
+
 }
