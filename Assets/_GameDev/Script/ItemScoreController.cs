@@ -6,17 +6,26 @@ public class ItemScoreController : MonoBehaviour
     [SerializeField] private ItemController itemController;
     public int trueItemCount;
     private int requiredItemCount;
-
     [SerializeField] private TextMeshProUGUI textControl;
 
     void Start()
     {
         itemController = GetComponent<ItemController>();
         GameManager.Instance.RegisterItemScoreController(this);
-        requiredItemCount = Random.Range(1, 5);
-        Debug.Log(this.name + " " + requiredItemCount);
+        GenerateRandomRequiredCount();
     }
 
+
+    public void SetRequiredItemCount(int count)
+    {
+        requiredItemCount = count;
+        Debug.Log("sayılar aynı yeni sayı üretildi. Yeni sayi => " + requiredItemCount);
+    }
+
+    public int GenerateRandomRequiredCount()
+    {
+        return requiredItemCount = Random.Range(GameManager.Instance.levelManager.minRequiredCount,GameManager.Instance.levelManager.MaxRequiredCount);
+    }
     public int getTrueItemCount()
     {
         return trueItemCount;
@@ -24,35 +33,45 @@ public class ItemScoreController : MonoBehaviour
     public void TrueText()
     {
         trueItemCount++;
-        if (trueItemCount > 0)
-        {
-            textControl.color = Color.green;
-        }
-        else if (trueItemCount == 0)
-        {
-            textControl.color = Color.white;
-        }
+     
 
+        textControl.color = Color.green;
         textControl.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), .25f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            textControl.transform.DOScale(Vector3.one, .25f);
+            textControl.transform.DOScale(Vector3.one, .25f).OnComplete(() =>
+            {
+                TextColorController();
+            });
         });
     }
     public void FalseText()
     {
         trueItemCount--;
-        if (trueItemCount < 0)
+
+        textControl.color = Color.red;
+        textControl.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), .3f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            textControl.color = Color.red;
+            textControl.transform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack).OnComplete(()=> 
+            {
+                TextColorController();
+            });
+        });
+    }
+
+    private void TextColorController()
+    {
+        if (trueItemCount > requiredItemCount)
+        {
+            textControl.color = Color.green;
         }
-        else if (trueItemCount == 0)
+        else if (trueItemCount >= 0)
         {
             textControl.color = Color.white;
         }
-        textControl.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), .3f).SetEase(Ease.OutBack).OnComplete(() =>
+        else if (trueItemCount < 0)
         {
-            textControl.transform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack);
-        });
+            textControl.color = Color.red;
+        }
     }
     public bool ControlWinOrFail()
     {

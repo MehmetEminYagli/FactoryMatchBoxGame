@@ -15,12 +15,16 @@ public class LevelManager : MonoBehaviour
     private List<ItemScoreController> itemScoreControllers;
     [SerializeField] private List<GameObject> spawnedObjects;
 
+    public int minRequiredCount;
+    public int MaxRequiredCount;
+
 
     void Start()
     {
         spawnMachineList = GameManager.Instance.spawnMachineList;
         itemScoreControllers = GameManager.Instance.itemScoreControllerList;
         spawnedObjects = new List<GameObject>();
+        RandomRequiredItemCountGenerator();
     }
 
     public void RemoveSpawnedObject(GameObject destroyedObject)
@@ -63,21 +67,14 @@ public class LevelManager : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                //Debug.Log("tüm spawn olan nesneler daha destory olmadı");
-            }
-
+            else {/*Debug.Log("tüm spawn olan nesneler daha destory olmadı");*/}
         }
-        else
-        {
-            //Debug.Log("tüm makineler daha spawn etmeyi bırakmadı");
-        }
+        else {/*Debug.Log("tüm makineler daha spawn etmeyi bırakmadı");*/}
     }
 
     public void OnExtinguishFireButtonPressed()
     {
-        foreach (var machine in GameManager.Instance.spawnMachineList)
+        foreach (MachineSpawnScript machine in GameManager.Instance.spawnMachineList)
         {
             MachineStatus machineStatus = machine.GetComponent<MachineStatus>();
             if (machineStatus != null && machine.GetisBroken() == true)
@@ -87,6 +84,40 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
+
+    public List<int> generatedCounts = new List<int>();
+    public void RandomRequiredItemCountGenerator()
+    {
+        foreach (ItemScoreController itemScore in GameManager.Instance.itemScoreControllerList)
+        {
+                int requiredCount = itemScore.GenerateRandomRequiredCount();  
+
+                bool isUnique = false;
+
+                for (int i = 0; i < 200; i++) 
+                {
+                    isUnique = generatedCounts.All(existingCount => //liste ilk başta boş olduğunda  true değer döndürüyor ve o sayıyı listeye ekliyor ondan sonra gelen sayıyı ise kontrol ediyor.
+                        Mathf.Abs(existingCount - requiredCount) >= 10 &&  // Fark 10'dan küçük olmasın
+                        Mathf.Abs(existingCount - requiredCount) <= 25     // Fark 25'ten büyük olmasın
+                    );
+                    if (isUnique)
+                    {
+                        generatedCounts.Add(requiredCount);
+                        itemScore.SetRequiredItemCount(requiredCount);
+                        break;
+                    }
+                    else
+                    {
+                        requiredCount = itemScore.GenerateRandomRequiredCount();  // Yeniden sayı üret
+                    }
+                }
+                if (!isUnique)
+                {
+                    Debug.LogWarning("Benzersiz sayı bulunamadı! Yine de sayıyı ekliyoruz.");
+                }
+        }
+    }
+
 
 
     public static void ReloadScene()
