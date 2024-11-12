@@ -7,7 +7,7 @@ public class MachineStatus : MonoBehaviour
     private MachineSpawnScript machineSpawnScript;
     [SerializeField] private GameObject machineBrokeEffect;
     [SerializeField] private GameObject machineBurnEffect;
-
+    [SerializeField] private GameObject fireman;
 
     public Action OnMachineStateChanged;
     private MachineState _machineState;
@@ -84,6 +84,7 @@ public class MachineStatus : MonoBehaviour
 
     public void MachineGoodBtn()
     {
+        fireman.GetComponentInChildren<FiremanController>().BtnFireMan();
         StartCoroutine(MachineStatusGood());
     }
 

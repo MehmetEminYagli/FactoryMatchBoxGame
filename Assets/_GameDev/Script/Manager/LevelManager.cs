@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
 
     public bool iscontrol = false;
 
-    private List<MachineSpawnScript> spawnMachineList;
+    public List<MachineSpawnScript> spawnMachineList;
     private List<ItemScoreController> itemScoreControllers;
     [SerializeField] private List<GameObject> spawnedObjects;
 
@@ -102,6 +102,10 @@ public class LevelManager : MonoBehaviour
             {
                 Debug.Log($"{gameObject.name} fire extinguished.");
                 machineStatus.MachineGoodBtn(); // Extinguish fire if machine is in Fire state
+            }
+            else
+            {
+                Debug.Log("makine yanmıyor");
             }
         }
     }

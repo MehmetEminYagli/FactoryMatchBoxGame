@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class MachineSpawnScript : MonoBehaviour
 {
-    private MachineController machineController;
+    public MachineController machineController;
     [SerializeField] private List<GameObject> spawnableObjects;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private bool isSpawn = true;

@@ -14,6 +14,9 @@ public class FiremanController : MonoBehaviour
     [SerializeField] private NavMeshAgent navMeshAgent;
     private bool isMovingToB = false;
 
+
+
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();

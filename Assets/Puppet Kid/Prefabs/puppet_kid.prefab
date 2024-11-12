@@ -652,6 +652,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointA: {fileID: 0}
   pointB: {fileID: 0}
+  lookAtPointA: {fileID: 0}
+  lookAtPointB: {fileID: 0}
   animator: {fileID: 1737706889828983884}
   waitTime: 3
   navMeshAgent: {fileID: 0}
