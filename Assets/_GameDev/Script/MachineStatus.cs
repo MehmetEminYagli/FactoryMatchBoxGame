@@ -49,6 +49,7 @@ public class MachineStatus : MonoBehaviour
                 machineSpawnScript.SetIsBroken(false);
                 machineBurnEffect.SetActive(false);
                 machineBrokeEffect.SetActive(false);
+                fireman.GetComponentInChildren<FiremanController>().WaitAndMoveSafeArea();
                 if (previousState == MachineState.Fire)
                 {
                     StartCoroutine(RandomMachineStatusChange());
@@ -72,12 +73,9 @@ public class MachineStatus : MonoBehaviour
 
     IEnumerator RandomMachineStatusChange()
     {
-        float randomWaitTime = UnityEngine.Random.Range(30, 90);
-        Debug.Log(gameObject.name + "şu kadar süre => " + randomWaitTime);
+        float randomWaitTime = UnityEngine.Random.Range(5, 30);
         yield return new WaitForSeconds(randomWaitTime);
         MachineState = MachineState.Fire;
-        //bug var belirli bir yerden sonra sürekli çalışıyor
-        //machine sönme olayı yanan makineye belirli bir süre basarsa o sönme geçer gibi birşey düşünüyorum
 
         //MachineState = (UnityEngine.Random.Range(0, 2) == 0) ? MachineState.Fire : MachineState.Broken;
     }
@@ -88,10 +86,11 @@ public class MachineStatus : MonoBehaviour
         StartCoroutine(MachineStatusGood());
     }
 
+    [SerializeField] private float fireTime;
     IEnumerator MachineStatusGood()
     {
         float randomWaitTime = UnityEngine.Random.Range(3, 10);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(fireTime);
         foreach (Transform child in machineBurnEffect.transform)
         {
             child.DOScale(new Vector3(0, 0, 0), .4f).OnComplete(() =>

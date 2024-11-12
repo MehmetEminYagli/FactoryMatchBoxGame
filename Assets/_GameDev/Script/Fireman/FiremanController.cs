@@ -1,20 +1,22 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class FiremanController : MonoBehaviour
 {
-    public Transform pointA;
-    public Transform pointB;
-    public Transform lookAtPointA;
-    public Transform lookAtPointB;
-    public Animator animator;
-    public float waitTime = 1f;
+    [SerializeField] private Transform pointA;
+    [SerializeField] private Transform pointB;
+    [SerializeField] private Transform lookAtPointA;
+    [SerializeField] private Transform lookAtPointB;
+    [SerializeField] private Animator animator;
 
-    [SerializeField] private NavMeshAgent navMeshAgent;
+
+    private NavMeshAgent navMeshAgent;
     private bool isMovingToB = false;
 
-
+    //efects
+    [SerializeField] private GameObject FireExtinguisherEffects;
 
 
     void Start()
@@ -45,8 +47,10 @@ public class FiremanController : MonoBehaviour
 
         if (!isMovingToB && Vector3.Distance(transform.position, pointA.position) < 0.5f)
         {
-            StartCoroutine(WaitAndReturnToSafeArea());
+            //StartCoroutine(WaitAndReturnToSafeArea());
             LookAtPoint(lookAtPointA);
+            SetActiveFireExtinguisher(true);
+
         }
         else if (isMovingToB && Vector3.Distance(transform.position, pointB.position) < 0.5f)
         {
@@ -62,7 +66,26 @@ public class FiremanController : MonoBehaviour
             navMeshAgent.isStopped = true;
             Vector3 directionToLook = lookAtPoint.position - transform.position;
             Quaternion rotation = Quaternion.LookRotation(directionToLook);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 3f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 6f);
+
+        }
+    }
+    private void SetActiveFireExtinguisher(bool setactive)
+    {
+        if (setactive)
+        {
+            FireExtinguisherEffects.SetActive(true); // setactive true olduğunda hemen aktif hale getiriyoruz
+            FireExtinguisherEffects.transform.DOScale(Vector3.one, 0.5f).OnComplete(() =>
+            {
+                FireExtinguisherEffects.SetActive(setactive);
+            });
+        }
+        else
+        {
+            FireExtinguisherEffects.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
+            {
+                FireExtinguisherEffects.SetActive(false);
+            });
         }
     }
 
@@ -76,6 +99,7 @@ public class FiremanController : MonoBehaviour
 
     void MoveToSafeArea()
     {
+        SetActiveFireExtinguisher(false);
         navMeshAgent.SetDestination(pointB.position);
         animator.SetBool("IsWalking", true);
         navMeshAgent.isStopped = false;
@@ -87,19 +111,24 @@ public class FiremanController : MonoBehaviour
         if (other.TryGetComponent<FireMachinePoint>(out FireMachinePoint firePoint))
         {
             animator.SetBool("IsWalking", false);
-            StartCoroutine(WaitAndReturnToSafeArea());
+            //StartCoroutine(WaitAndReturnToSafeArea());
         }
+    }
+
+    public void WaitAndMoveSafeArea()
+    {
+        StartCoroutine(WaitAndReturnToSafeArea());
     }
 
     IEnumerator WaitAndReturnToSafeArea()
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(.1f);
         MoveToSafeArea();
     }
 
     IEnumerator WaitAtSafeArea()
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(.6f);
         isMovingToB = false; //bu kontrolü yazmayı unuttugumu fark etmem bir günüme sebep oldu ve cozumu 2dk da buldum bazen ara vermek gerekiyormus.
     }
 }
