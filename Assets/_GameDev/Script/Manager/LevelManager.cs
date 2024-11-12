@@ -38,6 +38,27 @@ public class LevelManager : MonoBehaviour
             spawnedObjects.Add(spawnedObject);
         }
     }
+    public int spawnObjectID_0;
+    public int spawnObjectID_1;
+    public int spawnObjectID_2;
+    public void ControlSpawnedID(GameObject newObject)
+    {
+        // Check the new object's ID and increment the corresponding counter
+        int itemID = newObject.GetComponent<FactoryItem>().GetItemID();
+
+        switch (itemID)
+        {
+            case 1:
+                spawnObjectID_0++;
+                break;
+            case 2:
+                spawnObjectID_1++;
+                break;
+            case 3:
+                spawnObjectID_2++;
+                break;
+        }
+    }
 
     private void Update()
     {
