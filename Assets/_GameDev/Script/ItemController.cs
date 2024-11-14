@@ -15,10 +15,21 @@ public class ItemController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.RegisterItemScoreController(this);
         machine = GetComponentInParent<MachineController>();
         itemScore = GetComponent<ItemScoreController>();
         SetTrueMachineEffect(false);
         SetFalseMachineEffect(false);
+    }
+
+    public MachineController GetMachineController()
+    {
+        return machine;
+    }
+
+    public ItemScoreController GetItemScoreController()
+    {
+        return itemScore;
     }
 
     [System.Obsolete]

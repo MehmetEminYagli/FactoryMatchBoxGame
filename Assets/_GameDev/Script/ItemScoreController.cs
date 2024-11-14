@@ -11,10 +11,14 @@ public class ItemScoreController : MonoBehaviour
     void Start()
     {
         itemController = GetComponent<ItemController>();
-        GameManager.Instance.RegisterItemScoreController(this);
+        
         GenerateRandomRequiredCount();
     }
 
+    public int GetRequiredItemCount()
+    {
+        return requiredItemCount;
+    }
 
     public void SetRequiredItemCount(int count)
     {

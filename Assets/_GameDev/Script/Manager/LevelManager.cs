@@ -5,14 +5,10 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 public class LevelManager : MonoBehaviour
 {
-    [Header("kontrol")]
-    public int controlFinishCount; //burası şu kadar nesne spawn olduktan sonra spawn olmayı durdur yapıcaz ve kontrol kısmına geçicek
-    /*[SerializeField] private int RequiredTrueItemCount;*/ // leveli geçmek için gerekli olan doğru item sayısına bakıcağız
-
     public bool iscontrol = false;
 
     public List<MachineSpawnScript> spawnMachineList;
-    private List<ItemScoreController> itemScoreControllers;
+    private List<ItemController> itemControllers;
     [SerializeField] private List<GameObject> spawnedObjects;
 
     public int minRequiredCount;
@@ -22,7 +18,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         spawnMachineList = GameManager.Instance.spawnMachineList;
-        itemScoreControllers = GameManager.Instance.itemScoreControllerList;
+        itemControllers = GameManager.Instance.itemControllerList;
         spawnedObjects = new List<GameObject>();
         RandomRequiredItemCountGenerator();
     }
@@ -38,9 +34,9 @@ public class LevelManager : MonoBehaviour
             spawnedObjects.Add(spawnedObject);
         }
     }
-    public int spawnObjectID_0;
     public int spawnObjectID_1;
     public int spawnObjectID_2;
+    public int spawnObjectID_3;
     public void ControlSpawnedID(GameObject newObject)
     {
         // Check the new object's ID and increment the corresponding counter
@@ -49,15 +45,51 @@ public class LevelManager : MonoBehaviour
         switch (itemID)
         {
             case 1:
-                spawnObjectID_0++;
-                break;
-            case 2:
                 spawnObjectID_1++;
                 break;
-            case 3:
+            case 2:
                 spawnObjectID_2++;
                 break;
+            case 3:
+                spawnObjectID_3++;
+                break;
         }
+
+    }
+
+
+    //bunu düzelticem
+    [SerializeField] private List<int> machineIDList;
+    [SerializeField] private List<int> requiredCountList;
+
+    public bool CanSpawnItem(int itemID, MachineSpawnScript machine)
+    {
+        // Assuming requiredCountList indices correspond to item IDs (1, 2, 3)
+        switch (itemID)
+        {
+            case 1:
+                if (spawnObjectID_1 >= requiredCountList[1])
+                {
+                    machine.GetSpawnableObjects().RemoveAt(requiredCountList[1]);
+                    return false;
+                }
+                break;
+            case 2:
+                if (spawnObjectID_2 >= requiredCountList[0])
+                {
+                    machine.GetSpawnableObjects().RemoveAt(requiredCountList[0]);
+                    return false;
+                }
+                break;
+            case 3:
+                if (spawnObjectID_3 >= requiredCountList[2])
+                {
+                    machine.GetSpawnableObjects().RemoveAt(requiredCountList[2]);
+                    return false;
+                }
+                break;
+        }
+        return true;
     }
 
     private void Update()
@@ -73,7 +105,7 @@ public class LevelManager : MonoBehaviour
                 iscontrol = true;
                 if (iscontrol)
                 {
-                    bool allCorrect = itemScoreControllers.All(controller => controller.ControlWinOrFail());
+                    bool allCorrect = itemControllers.All(controller => controller.GetItemScoreController().ControlWinOrFail());
                     //listdeki tüm sayıları leveli geçmek için gerekli olan sayı ile karşılaştırıyor biri eşit değilse false değer döndürüyor hepsi eşit ise true değer döndüyor
                     //oyuncu win mi fail mi kontrol et
                     if (allCorrect)
@@ -113,33 +145,17 @@ public class LevelManager : MonoBehaviour
     public List<int> generatedCounts = new List<int>();
     public void RandomRequiredItemCountGenerator()
     {
-        foreach (ItemScoreController itemScore in GameManager.Instance.itemScoreControllerList)
+        foreach (ItemController itemScore in GameManager.Instance.itemControllerList)
         {
-                int requiredCount = itemScore.GenerateRandomRequiredCount();  
+            int requiredCount = itemScore.GetItemScoreController().GenerateRandomRequiredCount();
 
-                bool isUnique = false;
 
-                for (int i = 0; i < 200; i++) 
-                {
-                    isUnique = generatedCounts.All(existingCount => //liste ilk başta boş olduğunda  true değer döndürüyor ve o sayıyı listeye ekliyor ondan sonra gelen sayıyı ise kontrol ediyor.
-                        Mathf.Abs(existingCount - requiredCount) >= 10 &&  // Fark 10'dan küçük olmasın
-                        Mathf.Abs(existingCount - requiredCount) <= 25     // Fark 25'ten büyük olmasın
-                    );
-                    if (isUnique)
-                    {
-                        generatedCounts.Add(requiredCount);
-                        itemScore.SetRequiredItemCount(requiredCount);
-                        break;
-                    }
-                    else
-                    {
-                        requiredCount = itemScore.GenerateRandomRequiredCount();  // Yeniden sayı üret
-                    }
-                }
-                if (!isUnique)
-                {
-                    Debug.LogWarning("Benzersiz sayı bulunamadı! Yine de sayıyı ekliyoruz.");
-                }
+            generatedCounts.Add(requiredCount);
+            itemScore.GetItemScoreController().SetRequiredItemCount(requiredCount);
+            requiredCountList.Add(itemScore.GetItemScoreController().GetRequiredItemCount());
+            machineIDList.Add(itemScore.GetMachineController().GetMachineID());
+
+
         }
     }
 

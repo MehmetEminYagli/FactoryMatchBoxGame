@@ -25,7 +25,7 @@ public class GameManager : MonoSingleton<GameManager>
 
 
     public List<MachineSpawnScript> spawnMachineList = new List<MachineSpawnScript>();
-    public List<ItemScoreController> itemScoreControllerList = new List<ItemScoreController>();
+    public List<ItemController> itemControllerList = new List<ItemController>();
     protected override void Init()
     {
         base.Init();
@@ -78,10 +78,10 @@ public class GameManager : MonoSingleton<GameManager>
             spawnMachineList.Add(machine);
     }
 
-    public void RegisterItemScoreController(ItemScoreController itemScore)
+    public void RegisterItemScoreController(ItemController itemScore)
     {
-        if (!itemScoreControllerList.Contains(itemScore))
-            itemScoreControllerList.Add(itemScore);
+        if (!itemControllerList.Contains(itemScore))
+            itemControllerList.Add(itemScore);
     }
 
 

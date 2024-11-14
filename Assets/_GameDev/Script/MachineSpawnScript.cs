@@ -30,6 +30,20 @@ public class MachineSpawnScript : MonoBehaviour
         isBroken = false;
     }
 
+    public void RemoveSpawnableItemByID(int itemID)
+    {
+        // Find the object with the matching item ID
+        GameObject itemToRemove = spawnableObjects.Find(obj => obj.GetComponent<FactoryItem>().GetItemID() == itemID);
+        // If the item is found, remove it
+        if (itemToRemove != null)
+        {
+            spawnableObjects.Remove(itemToRemove);
+        }
+    }
+    public List<GameObject> GetSpawnableObjects()
+    {
+        return spawnableObjects;
+    }
 
     private void ComponentStart()
     {
@@ -48,8 +62,7 @@ public class MachineSpawnScript : MonoBehaviour
             if (isBroken == false)
             {
                 SpawnFactoryItem();
-                spawnedCount++;
-                if (spawnedCount == GameManager.Instance.levelManager.controlFinishCount)
+                if (spawnableObjects.Count ==0)
                 {
                     Debug.Log("nesne spawn olmayı bırakıyor");
                     isSpawn = false;
@@ -62,18 +75,34 @@ public class MachineSpawnScript : MonoBehaviour
         }
     }
 
+    public void SetIsSpawn(bool spawn)
+    {
+        isSpawn = spawn;
+    }
 
     private void SpawnFactoryItem()
     {
         spawnableObjects = machineController.GetSpawnListScript().GetSpawnList();
         if (spawnableObjects.Count == 0) return;
+
         int randomIndex = Random.Range(0, spawnableObjects.Count);
         GameObject selectedItem = spawnableObjects[randomIndex];
-        GameObject spawnedObject = Instantiate(selectedItem, spawnPoint.position, Quaternion.identity, spawnPoint);
-        GameManager.Instance.levelManager.AddSpawnedObject(spawnedObject.gameObject);
-        GameManager.Instance.levelManager.ControlSpawnedID(spawnedObject.gameObject);
 
+        int itemID = selectedItem.GetComponent<FactoryItem>().GetItemID();
 
+        // Check if this item can still be spawned
+        if (GameManager.Instance.levelManager.CanSpawnItem(itemID,this))
+        {
+            GameObject spawnedObject = Instantiate(selectedItem, spawnPoint.position, Quaternion.identity, spawnPoint);
+            GameManager.Instance.levelManager.AddSpawnedObject(spawnedObject.gameObject);
+            GameManager.Instance.levelManager.ControlSpawnedID(spawnedObject.gameObject);
+
+           
+        }
+        else
+        {
+            Debug.Log($"Cannot spawn item with ID {itemID} - spawn limit reached.");
+        }
 
 
     }
