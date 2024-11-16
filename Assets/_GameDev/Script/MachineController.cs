@@ -4,14 +4,17 @@ public class MachineController : MonoBehaviour
 {
     [SerializeField] private MachineSpawnScript machinespawn;
     [SerializeField] private ConveyorScriptV2 conveyor;
-    [SerializeField] private SpawnListGameobject spawnListGameobject;
+    //[SerializeField] private GameObject spawnListGameobject;
 
     [SerializeField] private int machineID;
+
+
     void Start()
     {
+        
         machinespawn = GetComponent<MachineSpawnScript>();
         conveyor = GetComponentInChildren<ConveyorScriptV2>();
-        spawnListGameobject = GetComponent<SpawnListGameobject>();
+        //spawnListGameobject.GetComponent<SpawnListGameobject>();
         GetMachineID();
     }
 
@@ -30,10 +33,7 @@ public class MachineController : MonoBehaviour
         return conveyor;
     }
 
-    public SpawnListGameobject GetSpawnListScript()
-    {
-        return spawnListGameobject;
-    }
+   
 
 
 

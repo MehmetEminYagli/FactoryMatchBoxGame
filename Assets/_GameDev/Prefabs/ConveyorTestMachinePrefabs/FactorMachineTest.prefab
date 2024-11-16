@@ -853,7 +853,6 @@ GameObject:
   - component: {fileID: 1081280774596769377}
   - component: {fileID: 7787239556563635736}
   - component: {fileID: 467807747672119859}
-  - component: {fileID: 7487159983901422187}
   - component: {fileID: 2297514081088561853}
   m_Layer: 0
   m_Name: FactorMachineTest
@@ -913,28 +912,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machineController: {fileID: 0}
-  spawnableObjects: []
   spawnPoint: {fileID: 7842086438392346532}
   isSpawn: 1
   isBroken: 0
   spawnedCount: 0
+  spawnListScript: {fileID: 0}
   spawnRate: 3
---- !u!114 &7487159983901422187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765594266256449098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb703fa5272c5da41963b75e4b33046f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnList:
-  - {fileID: 2212610754881703150, guid: 61b3a283ce2cabd438d3b7b8b8b7b1e7, type: 3}
-  - {fileID: 2957144145644321142, guid: 35952373cb609f440a536f3a0a97c97f, type: 3}
-  - {fileID: 507642202906371786, guid: db139432a4482954c9e2a1e0367f00fc, type: 3}
 --- !u!114 &2297514081088561853
 MonoBehaviour:
   m_ObjectHideFlags: 0

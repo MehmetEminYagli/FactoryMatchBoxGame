@@ -4,11 +4,14 @@ using System.Collections.Generic;
 public class MachineSpawnScript : MonoBehaviour
 {
     public MachineController machineController;
-    [SerializeField] private List<GameObject> spawnableObjects;
+
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private bool isSpawn = true;
     [SerializeField] private bool isBroken = false;
     [SerializeField] private int spawnedCount;
+    [SerializeField] public GameObject spawnListScript;
+    private List<GameObject> spawnList;
+
     public bool GetisSpawn()
     {
         return isSpawn;
@@ -24,10 +27,12 @@ public class MachineSpawnScript : MonoBehaviour
     void Start()
     {
         GameManager.Instance.RegisterMachine(this);
+        spawnList = spawnListScript.GetComponent<SpawnListGameobject>().GetSpawnList();
         ComponentStart();
         StartCoroutine(SpawnItemCoroutine());
         StartCoroutine(stop());
         isBroken = false;
+        
     }
 
 
@@ -48,10 +53,8 @@ public class MachineSpawnScript : MonoBehaviour
             if (isBroken == false)
             {
                 SpawnFactoryItem();
-                spawnedCount++;
-                if (spawnedCount == GameManager.Instance.levelManager.controlFinishCount)
+                if (spawnList.Count == 0)
                 {
-                    Debug.Log("nesne spawn olmayı bırakıyor");
                     isSpawn = false;
                 }
             }
@@ -65,18 +68,18 @@ public class MachineSpawnScript : MonoBehaviour
 
     private void SpawnFactoryItem()
     {
-        spawnableObjects = machineController.GetSpawnListScript().GetSpawnList();
-        if (spawnableObjects.Count == 0) return;
-        int randomIndex = Random.Range(0, spawnableObjects.Count);
-        GameObject selectedItem = spawnableObjects[randomIndex];
+        spawnList = spawnListScript.GetComponent<SpawnListGameobject>().GetSpawnList();
+        if (spawnList.Count == 0) return;
+        int randomIndex = Random.Range(0, spawnList.Count);
+        GameObject selectedItem = spawnList[randomIndex];
         GameObject spawnedObject = Instantiate(selectedItem, spawnPoint.position, Quaternion.identity, spawnPoint);
         GameManager.Instance.levelManager.AddSpawnedObject(spawnedObject.gameObject);
         GameManager.Instance.levelManager.ControlSpawnedID(spawnedObject.gameObject);
-
-
-
-
+        spawnListScript.GetComponent<SpawnListGameobject>().ControlItemSpawn(spawnedObject);
     }
+
+
+
 
     public void StopMachinePalet()
     {

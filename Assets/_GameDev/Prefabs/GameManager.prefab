@@ -1044,12 +1044,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c1e27dc57cf84eb8b43cb54cd115f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlFinishCount: 50
   iscontrol: 0
   spawnMachineList: []
   spawnedObjects: []
-  minRequiredCount: 10
-  MaxRequiredCount: 100
+  minRequiredCount: 1
+  MaxRequiredCount: 10
+  machineListID: 
+  itemRequiredCount: 
   spawnObjectID_0: 0
   spawnObjectID_1: 0
   spawnObjectID_2: 0
@@ -2027,7 +2028,7 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   notificationManager: {fileID: 0}
   spawnMachineList: []
-  itemScoreControllerList: []
+  itemControllerList: []
 --- !u!1 &2081552924402940834
 GameObject:
   m_ObjectHideFlags: 0

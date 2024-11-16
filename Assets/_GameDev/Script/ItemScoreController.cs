@@ -3,18 +3,14 @@ using TMPro;
 using DG.Tweening;
 public class ItemScoreController : MonoBehaviour
 {
-    [SerializeField] private ItemController itemController;
     public int trueItemCount;
     private int requiredItemCount;
     [SerializeField] private TextMeshProUGUI textControl;
 
     void Start()
     {
-        itemController = GetComponent<ItemController>();
-        GameManager.Instance.RegisterItemScoreController(this);
         GenerateRandomRequiredCount();
     }
-
 
     public void SetRequiredItemCount(int count)
     {
@@ -30,6 +26,11 @@ public class ItemScoreController : MonoBehaviour
     {
         return trueItemCount;
     }
+    public int getRequiredItemCount()
+    {
+        return requiredItemCount;
+    }
+
     public void TrueText()
     {
         trueItemCount++;
