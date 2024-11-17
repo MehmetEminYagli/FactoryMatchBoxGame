@@ -14,33 +14,26 @@ public class LevelManager : MonoBehaviour
 
     public int minRequiredCount;
     public int MaxRequiredCount;
-
-    public List<int> machineListID;
     public List<int> itemRequiredCount;
+    public List<int> machineIDList;
 
-    
-
-    public void AddMachineIDandRequiredCount(int machineID , int requiredCount)
+    public void AddMachineID(int machineID)
     {
-        if (!machineListID.Contains(machineID))
+        if (!machineIDList.Contains(machineID))
         {
-            machineListID.Add(machineID);
-        }
-        if (!itemRequiredCount.Contains(requiredCount))
-        {
-            itemRequiredCount.Add(requiredCount);
+            machineIDList.Add(machineID);
         }
     }
-
-
-
+    public void AddRequiredCount(int requiredCount)
+    {
+        itemRequiredCount.Add(requiredCount);
+    }
     void Start()
     {
         spawnMachineList = GameManager.Instance.spawnMachineList;
         itemControllers = GameManager.Instance.itemControllerList;
         spawnedObjects = new List<GameObject>();
         PlusItemSpawn();
-        RandomRequiredItemCountGenerator();
     }
 
     public void RemoveSpawnedObject(GameObject destroyedObject)
@@ -54,8 +47,6 @@ public class LevelManager : MonoBehaviour
             spawnedObjects.Add(spawnedObject);
         }
     }
-
-
 
     public int spawnObjectID_0;
     public int spawnObjectID_1;
@@ -138,41 +129,6 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-
-    public List<int> generatedCounts = new List<int>();
-    public void RandomRequiredItemCountGenerator()
-    {
-        foreach (ItemController itemScore in GameManager.Instance.itemControllerList)
-        {
-            int requiredCount = itemScore.GetItemScoreController().GenerateRandomRequiredCount();
-
-            bool isUnique = false;
-
-            for (int i = 0; i < 200; i++)
-            {
-                isUnique = generatedCounts.All(existingCount => //liste ilk başta boş olduğunda  true değer döndürüyor ve o sayıyı listeye ekliyor ondan sonra gelen sayıyı ise kontrol ediyor.
-                    Mathf.Abs(existingCount - requiredCount) >= 10 &&  // Fark 10'dan küçük olmasın
-                    Mathf.Abs(existingCount - requiredCount) <= 25     // Fark 25'ten büyük olmasın
-                );
-                if (isUnique)
-                {
-                    generatedCounts.Add(requiredCount);
-                    itemScore.GetItemScoreController().SetRequiredItemCount(requiredCount);
-                    break;
-                }
-                else
-                {
-                    requiredCount = itemScore.GetItemScoreController().GenerateRandomRequiredCount();  // Yeniden sayı üret
-                }
-            }
-            if (!isUnique)
-            {
-                Debug.LogWarning("Benzersiz sayı bulunamadı! Yine de sayıyı ekliyoruz.");
-            }
-        }
-    }
-
-
 
     public static void ReloadScene()
     {

@@ -57,7 +57,7 @@ public class SpawnListGameobject : MonoBehaviour
         }
         else if (itemid == 2)
         {
-            if (levelManager.spawnObjectID_1 >= levelManager.itemRequiredCount[2])
+            if (levelManager.spawnObjectID_1 >= levelManager.itemRequiredCount[1])
             {
                 // Use a for loop to safely remove elements
                 for (int i = spawnList.Count - 1; i >= 0; i--)

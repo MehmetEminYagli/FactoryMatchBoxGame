@@ -16,6 +16,7 @@ public class MachineController : MonoBehaviour
         conveyor = GetComponentInChildren<ConveyorScriptV2>();
         //spawnListGameobject.GetComponent<SpawnListGameobject>();
         GetMachineID();
+        GameManager.Instance.levelManager.AddMachineID(GetMachineID());
     }
 
     public int GetMachineID()

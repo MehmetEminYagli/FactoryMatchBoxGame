@@ -4,7 +4,7 @@ using DG.Tweening;
 public class ItemController : MonoBehaviour
 {
 
-    
+
     [SerializeField] private MachineController machine;
     [SerializeField] private ItemScoreController itemScore;
     [SerializeField] private GameObject controlMachineObject;
@@ -23,18 +23,17 @@ public class ItemController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.levelManager.AddMachineIDandRequiredCount(machine.GetMachineID(), itemScore.getRequiredItemCount());
-    }
-
-    public MachineController GetMachineController()
-    {
-        return machine;
+        //GameManager.Instance.levelManager.AddMachineIDandRequiredCount(machine.GetMachineID(), itemScore.getRequiredItemCount());
     }
     public ItemScoreController GetItemScoreController()
     {
         return itemScore;
     }
 
+    public MachineController GetMachineController()
+    {
+        return machine;
+    }
     [System.Obsolete]
     private void OnTriggerEnter(Collider other)
     {

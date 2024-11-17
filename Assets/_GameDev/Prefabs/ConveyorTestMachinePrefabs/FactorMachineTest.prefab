@@ -897,7 +897,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machinespawn: {fileID: 0}
   conveyor: {fileID: 0}
-  spawnListGameobject: {fileID: 0}
   machineID: 0
 --- !u!114 &467807747672119859
 MonoBehaviour:
@@ -933,7 +932,9 @@ MonoBehaviour:
   machineBrokeEffect: {fileID: 3251841303226311694}
   machineBurnEffect: {fileID: 5552902241142353028}
   fireman: {fileID: 3140950677111519600}
-  fireTime: 10
+  minimumFireRate: 30
+  maximumFireRate: 90
+  fireTime: 5
 --- !u!1001 &240031052114151240
 PrefabInstance:
   m_ObjectHideFlags: 0

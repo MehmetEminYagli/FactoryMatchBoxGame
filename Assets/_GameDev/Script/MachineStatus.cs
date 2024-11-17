@@ -70,10 +70,11 @@ public class MachineStatus : MonoBehaviour
         }
     }
 
-
+    [SerializeField] private float minimumFireRate;
+    [SerializeField] private float maximumFireRate;
     IEnumerator RandomMachineStatusChange()
     {
-        float randomWaitTime = UnityEngine.Random.Range(5, 30);
+        float randomWaitTime = UnityEngine.Random.Range(minimumFireRate, maximumFireRate);
         yield return new WaitForSeconds(randomWaitTime);
         MachineState = MachineState.Fire;
 

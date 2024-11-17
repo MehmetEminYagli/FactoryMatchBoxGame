@@ -10,17 +10,12 @@ public class ItemScoreController : MonoBehaviour
     void Start()
     {
         GenerateRandomRequiredCount();
-    }
-
-    public void SetRequiredItemCount(int count)
-    {
-        requiredItemCount = count;
-        Debug.Log("sayılar aynı yeni sayı üretildi. Yeni sayi => " + requiredItemCount);
+        GameManager.Instance.levelManager.AddRequiredCount(getRequiredItemCount());
     }
 
     public int GenerateRandomRequiredCount()
     {
-        return requiredItemCount = Random.Range(GameManager.Instance.levelManager.minRequiredCount,GameManager.Instance.levelManager.MaxRequiredCount);
+        return requiredItemCount = Random.Range(GameManager.Instance.levelManager.minRequiredCount, GameManager.Instance.levelManager.MaxRequiredCount);
     }
     public int getTrueItemCount()
     {
@@ -34,7 +29,7 @@ public class ItemScoreController : MonoBehaviour
     public void TrueText()
     {
         trueItemCount++;
-     
+
 
         textControl.color = Color.green;
         textControl.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), .25f).SetEase(Ease.OutBack).OnComplete(() =>
@@ -52,7 +47,7 @@ public class ItemScoreController : MonoBehaviour
         textControl.color = Color.red;
         textControl.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), .3f).SetEase(Ease.OutBack).OnComplete(() =>
         {
-            textControl.transform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack).OnComplete(()=> 
+            textControl.transform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack).OnComplete(() =>
             {
                 TextColorController();
             });
