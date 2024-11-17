@@ -75,6 +75,8 @@ public class MachineSpawnScript : MonoBehaviour
         GameObject spawnedObject = Instantiate(selectedItem, spawnPoint.position, Quaternion.identity, spawnPoint);
         GameManager.Instance.levelManager.AddSpawnedObject(spawnedObject.gameObject);
         GameManager.Instance.levelManager.ControlSpawnedID(spawnedObject.gameObject);
+
+
         spawnListScript.GetComponent<SpawnListGameobject>().ControlItemSpawn(spawnedObject);
     }
 

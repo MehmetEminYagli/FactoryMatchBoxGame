@@ -12,14 +12,17 @@ public class ItemController : MonoBehaviour
     [SerializeField] private GameObject falseMachineEffect;
     [SerializeField] private float trueDestoryDelayTime;
 
-
-    private void Start()
+    private void Awake()
     {
         GameManager.Instance.RegisterItemScoreController(this);
         machine = GetComponentInParent<MachineController>();
         itemScore = GetComponent<ItemScoreController>();
         SetTrueMachineEffect(false);
         SetFalseMachineEffect(false);
+    }
+
+    private void Start()
+    {
         GameManager.Instance.levelManager.AddMachineIDandRequiredCount(machine.GetMachineID(), itemScore.getRequiredItemCount());
     }
 

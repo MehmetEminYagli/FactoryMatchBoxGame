@@ -33,6 +33,7 @@ public class SpawnListGameobject : MonoBehaviour
     //1,3,2
     public void ControlItemSpawn(GameObject spawnobject)
     {
+        Debug.Log(levelManager.itemRequiredCount.Count);
         int itemid = spawnobject.GetComponent<FactoryItem>().GetItemID();
 
         if (itemid == 1)
