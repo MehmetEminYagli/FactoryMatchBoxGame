@@ -1049,12 +1049,11 @@ MonoBehaviour:
   spawnedObjects: []
   minRequiredCount: 1
   MaxRequiredCount: 10
-  machineListID: 
   itemRequiredCount: 
+  machineIDList: 
   spawnObjectID_0: 0
   spawnObjectID_1: 0
   spawnObjectID_2: 0
-  generatedCounts: 
 --- !u!1 &1461387879521250713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,6 +2025,9 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   uiManager: {fileID: 0}
   notificationManager: {fileID: 0}
+  spawnMachineFireRateMin: 30
+  spawnMachineFireRateMax: 90
+  fireTime: 10
   spawnMachineList: []
   itemControllerList: []
 --- !u!1 &2081552924402940834

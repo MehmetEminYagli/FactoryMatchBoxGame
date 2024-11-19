@@ -934,7 +934,7 @@ MonoBehaviour:
   fireman: {fileID: 3140950677111519600}
   minimumFireRate: 30
   maximumFireRate: 90
-  fireTime: 5
+  fireTime: 10
 --- !u!1001 &240031052114151240
 PrefabInstance:
   m_ObjectHideFlags: 0

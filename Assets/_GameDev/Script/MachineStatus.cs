@@ -70,11 +70,9 @@ public class MachineStatus : MonoBehaviour
         }
     }
 
-    [SerializeField] private float minimumFireRate;
-    [SerializeField] private float maximumFireRate;
     IEnumerator RandomMachineStatusChange()
     {
-        float randomWaitTime = UnityEngine.Random.Range(minimumFireRate, maximumFireRate);
+        float randomWaitTime = UnityEngine.Random.Range(GameManager.Instance.spawnMachineFireRateMin, GameManager.Instance.spawnMachineFireRateMax);
         yield return new WaitForSeconds(randomWaitTime);
         MachineState = MachineState.Fire;
 
@@ -87,11 +85,10 @@ public class MachineStatus : MonoBehaviour
         StartCoroutine(MachineStatusGood());
     }
 
-    [SerializeField] private float fireTime;
     IEnumerator MachineStatusGood()
     {
         float randomWaitTime = UnityEngine.Random.Range(3, 10);
-        yield return new WaitForSeconds(fireTime);
+        yield return new WaitForSeconds(GameManager.Instance.fireTime);
         foreach (Transform child in machineBurnEffect.transform)
         {
             child.DOScale(new Vector3(0, 0, 0), .4f).OnComplete(() =>

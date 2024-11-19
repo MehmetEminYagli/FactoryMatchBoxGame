@@ -17,6 +17,8 @@ public class LevelManager : MonoBehaviour
     public List<int> itemRequiredCount;
     public List<int> machineIDList;
 
+
+
     public void AddMachineID(int machineID)
     {
         if (!machineIDList.Contains(machineID))

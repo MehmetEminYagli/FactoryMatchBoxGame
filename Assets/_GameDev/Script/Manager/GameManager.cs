@@ -24,6 +24,10 @@ public class GameManager : MonoSingleton<GameManager>
     }
 
 
+    public float spawnMachineFireRateMin;
+    public float spawnMachineFireRateMax;
+    public float fireTime;
+
     public List<MachineSpawnScript> spawnMachineList = new List<MachineSpawnScript>();
     public List<ItemController> itemControllerList = new List<ItemController>();
     protected override void Init()

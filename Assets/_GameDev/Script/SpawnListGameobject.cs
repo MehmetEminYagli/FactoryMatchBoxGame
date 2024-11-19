@@ -30,69 +30,47 @@ public class SpawnListGameobject : MonoBehaviour
         }
 
     }
-    //1,3,2
+
     public void ControlItemSpawn(GameObject spawnobject)
     {
-        Debug.Log(levelManager.itemRequiredCount.Count);
         int itemid = spawnobject.GetComponent<FactoryItem>().GetItemID();
 
-        if (itemid == 1)
+        // Makine için gerekli olan nesne sayısını ve mevcut üretilen nesne sayısını bir sözlükte tutuyoruz.
+        Dictionary<int, int> spawnObjectCounts = new Dictionary<int, int>
         {
-            if (levelManager.spawnObjectID_0 >= levelManager.itemRequiredCount[0])
+            { 1, levelManager.spawnObjectID_0 },
+            { 2, levelManager.spawnObjectID_1 },
+            { 3, levelManager.spawnObjectID_2 }
+        };
+
+        // Gerekli sayıları da sözlükte tutuyoruz.
+        Dictionary<int, int> requiredCounts = new Dictionary<int, int>
+        {
+            { 1, levelManager.itemRequiredCount[0] },
+            { 2, levelManager.itemRequiredCount[1] },
+            { 3, levelManager.itemRequiredCount[2] }
+        };
+
+        // Eğer itemid sözlükte geçerli ise işlemi gerçekleştiriyoruz.
+        if (spawnObjectCounts.ContainsKey(itemid) && requiredCounts.ContainsKey(itemid))
+        {
+            if (spawnObjectCounts[itemid] >= requiredCounts[itemid])
             {
-                // Use a for loop to safely remove elements
+                // Güvenli bir şekilde itemleri kaldırıyoruz.
                 for (int i = spawnList.Count - 1; i >= 0; i--)
                 {
                     if (spawnList[i].GetComponent<FactoryItem>().GetItemID() == itemid)
                     {
                         spawnList.RemoveAt(i);
                     }
-                    else
-                    {
-                        Debug.Log("birinci id'li item bitti");
-                    }
                 }
+                Debug.Log($"ID'si {itemid} olan itemler kaldırıldı.");
             }
-
         }
-        else if (itemid == 2)
+        else
         {
-            if (levelManager.spawnObjectID_1 >= levelManager.itemRequiredCount[1])
-            {
-                // Use a for loop to safely remove elements
-                for (int i = spawnList.Count - 1; i >= 0; i--)
-                {
-                    if (spawnList[i].GetComponent<FactoryItem>().GetItemID() == itemid)
-                    {
-                        spawnList.RemoveAt(i);
-                    }
-                    else
-                    {
-                        Debug.Log("ikinci id'li item bitti");
-                    }
-                }
-            }
-
+            Debug.LogError($"Geçersiz item ID'si: {itemid}");
         }
-        else if (itemid == 3)
-        {
-            if (levelManager.spawnObjectID_2 >= levelManager.itemRequiredCount[1])
-            {
-                // Use a for loop to safely remove elements
-                for (int i = spawnList.Count - 1; i >= 0; i--)
-                {
-                    if (spawnList[i].GetComponent<FactoryItem>().GetItemID() == itemid)
-                    {
-                        spawnList.RemoveAt(i);
-                    }
-                    else
-                    {
-                        Debug.Log("üçümcü id'li item bitti");
-                    }
-                }
-            }
-        }
-
 
     }
 
