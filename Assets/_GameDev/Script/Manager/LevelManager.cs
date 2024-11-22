@@ -37,10 +37,15 @@ public class LevelManager : MonoBehaviour
         spawnedObjects = new List<GameObject>();
         PlusItemSpawn();
     }
-
+    private bool allMachinesStopped = false;
     public void RemoveSpawnedObject(GameObject destroyedObject)
     {
         spawnedObjects.Remove(destroyedObject);
+
+        if(spawnedObjects.Count == 0 && allMachinesStopped)
+        {
+            ControlWinOrFail();
+        }
     }
     public void AddSpawnedObject(GameObject spawnedObject)
     {
@@ -84,7 +89,16 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        ControlWinOrFail();
+        CheckIfMachinesFinishedSpawning();
+    }
+
+
+     public void CheckIfMachinesFinishedSpawning()
+    {
+        if (spawnMachineList.All(machine => machine.GetisSpawn() == false))
+        {
+            allMachinesStopped = true;
+        }
     }
     public void ControlWinOrFail()
     {
@@ -101,11 +115,13 @@ public class LevelManager : MonoBehaviour
                     if (allCorrect)
                     {
                         GameManager.Instance.LevelFinish(true);
+                        GameManager.Instance.adsManager.adsInterstitial.ShowInterstitialAd();
                         Debug.Log("oyunu kazanın");
                     }
                     else
                     {
                         GameManager.Instance.LevelFinish(false);
+                        GameManager.Instance.adsManager.adsInterstitial.ShowInterstitialAd();
                         Debug.Log("kaybettin loser");
                     }
                 }
@@ -137,5 +153,6 @@ public class LevelManager : MonoBehaviour
         DOTween.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
 
 }

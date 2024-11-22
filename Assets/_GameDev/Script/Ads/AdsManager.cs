@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class AdsManager : MonoBehaviour
 {
+
+
+    public ADSInterstitial adsInterstitial;
+
     public void Start()
     {
+        adsInterstitial = GetComponentInChildren<ADSInterstitial>();
+
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
@@ -41,7 +47,7 @@ public class AdsManager : MonoBehaviour
         }
 
         // Create a 320x50 banner at top of the screen
-        _bannerView = new BannerView(_adUnitId, AdSize.Banner, AdPosition.Top);
+        _bannerView = new BannerView(_adUnitId, AdSize.Banner, AdPosition.Bottom);
     }
 
     public void DestroyAd()

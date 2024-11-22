@@ -9,7 +9,7 @@ public class GameManager : MonoSingleton<GameManager>
     public LevelManager levelManager;
     public UIManager uiManager;
     public NotificationManager notificationManager;
-
+    public AdsManager adsManager;
 
     public Action OnGameStateChanged;
     private GameState _gameState;
@@ -44,6 +44,7 @@ public class GameManager : MonoSingleton<GameManager>
         levelManager = GetComponentInChildren<LevelManager>();
         uiManager = GetComponentInChildren<UIManager>();
         notificationManager = GetComponentInChildren<NotificationManager>();
+        adsManager = GetComponentInChildren<AdsManager>();
     }
 
     private void Start()
