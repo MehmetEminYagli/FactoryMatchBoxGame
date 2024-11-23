@@ -62,6 +62,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
 
         GameState = GameState.Gameplay;
+        
 
     }
 
@@ -70,7 +71,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
 
         GameState = isSuccess ? GameState.Complete : GameState.Fail;
-        
+       
         if (isSuccess)
         {
             DataManager.CurrentLevelIndex++;

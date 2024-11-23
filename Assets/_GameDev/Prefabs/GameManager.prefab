@@ -1035,7 +1035,6 @@ MonoBehaviour:
   MaxRequiredCount: 20
   itemRequiredCount: 
   machineIDList: 
-  allMachinesStopped: 0
   spawnObjectID_0: 0
   spawnObjectID_1: 0
   spawnObjectID_2: 0

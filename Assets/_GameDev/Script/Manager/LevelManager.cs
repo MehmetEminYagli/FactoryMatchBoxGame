@@ -36,16 +36,18 @@ public class LevelManager : MonoBehaviour
         itemControllers = GameManager.Instance.itemControllerList;
         spawnedObjects = new List<GameObject>();
         PlusItemSpawn();
+
+        if (spawnedObjects.Count == 0)
+        {
+            InvokeRepeating(nameof(ControlWinOrFail), 5f, 5f);
+
+        }
     }
-    private bool allMachinesStopped = false;
+
     public void RemoveSpawnedObject(GameObject destroyedObject)
     {
         spawnedObjects.Remove(destroyedObject);
 
-        if(spawnedObjects.Count == 0 && allMachinesStopped)
-        {
-            ControlWinOrFail();
-        }
     }
     public void AddSpawnedObject(GameObject spawnedObject)
     {
@@ -87,19 +89,7 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.levelManager.spawnObjectID_2 -= randomCount2;
     }
 
-    private void Update()
-    {
-        CheckIfMachinesFinishedSpawning();
-    }
-
-
-     public void CheckIfMachinesFinishedSpawning()
-    {
-        if (spawnMachineList.All(machine => machine.GetisSpawn() == false))
-        {
-            allMachinesStopped = true;
-        }
-    }
+ 
     public void ControlWinOrFail()
     {
         if (spawnMachineList.All(machine => machine.GetisSpawn() == false))
