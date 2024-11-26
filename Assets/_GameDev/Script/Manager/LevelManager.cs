@@ -123,6 +123,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnExtinguishFireButtonPressed()
     {
+        
         foreach (MachineSpawnScript machine in GameManager.Instance.spawnMachineList)
         {
             MachineStatus machineStatus = machine.GetComponent<MachineStatus>();
