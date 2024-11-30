@@ -56,6 +56,9 @@ public class ItemController : MonoBehaviour
                 SetFalseMachineEffect(true);
                 itemScore.FalseText();
                 DestroyFactoryItem(factoryItem, (.5f));
+
+                //haptic added
+                HapticManager.GenerateHaptic(PresetType.Warning);
             }
         }
     }
